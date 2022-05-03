@@ -13,14 +13,15 @@ import { PollService } from '../poll-service.service';
 })
 export class CreatePollComponent implements OnInit {
   poll:Poll = new Poll();
+  date!: Date;
   constructor(private servicePoll : PollService, private router : Router ) { }
-  
   ngOnInit(): void {
 
   }
   saveEmployee(){
     this.servicePoll.createPoll(this.poll).subscribe( data =>{
       console.log(data);
+      console.log(this.poll);
       this.goToEmployeeList();
     },
     error => console.log(error));

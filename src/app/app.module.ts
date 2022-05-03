@@ -19,6 +19,7 @@ import { VotePollComponent } from './vote-poll/vote-poll.component';
 import {SliderModule} from 'primeng/slider';
 import { PollsModule } from './polls/polls.module';
 import { PollsRoutingModule } from './polls/polls-routing.module';
+import {CalendarModule} from 'primeng/calendar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { PollsRoutingModule } from './polls/polls-routing.module';
     DataViewModule,
     OrderListModule,
     SliderModule,
+    CalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
