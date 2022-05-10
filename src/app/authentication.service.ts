@@ -13,6 +13,7 @@ const httpOptions = {
 export class AuthService {
   endpoint: string = 'http://localhost:8080/user/add';
   endpoint3: string = 'http://localhost:8080/user';
+  loginURL: string= `http://localhost:8080/user/login`;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   constructor(private http: HttpClient, public router: Router) {}
@@ -24,14 +25,14 @@ export class AuthService {
   signIn(user: User) {
     console.log(user);
     return this.http
-    .post<any>(`http://localhost:8080/user/login`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        this.getUserProfile(res._id).subscribe((res) => {
+    .post<any>(this.loginURL, {user})
+      .pipe(map(user => {
+        localStorage.setItem('access_token', user.token);
+        this.getUserProfile(user._id).subscribe((res) => {
           this.currentUser = res;
           this.router.navigate(['home']);
         });
-      });
+      }));
   }
   getToken() {
     return localStorage.getItem('access_token');
